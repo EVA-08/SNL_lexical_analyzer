@@ -15,8 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ch.l">
+    <ClCompile Include="lex.yy.c">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ch.l">
+      <Filter>资源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
