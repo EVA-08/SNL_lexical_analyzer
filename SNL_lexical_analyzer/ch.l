@@ -40,7 +40,7 @@ then|else|fi|while|do|read|write|return {
 	printf("'%s' ARRAY_INDEX\n", yytext);
 }
 
-[\+\*-/\(\)\[\];\.<=\t<<EOF>>] {
+[\+\*-/\(\)\[\];\.<=<<EOF>>]|" " {
 	printf("'%s' SINGLE_CHARACTER_DELIMITER\n", yytext);
 }
 
