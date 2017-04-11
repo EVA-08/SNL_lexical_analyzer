@@ -8,7 +8,8 @@
 		ANNOTATION_TERMINATOR, 
 		CHARACTER_IDENTIFIER,
 		ARRAY_INDEX,
-		UNSIGNED_INTEGER
+		UNSIGNED_INTEGER£¬
+		ERROR
 	};
 %}
 %%
@@ -52,6 +53,9 @@ then|else|fi|while|do|read|write|return {
 	printf("'%s' IDENTIFIER\n", yytext);
 }
 
+* {
+	printf("'%s' ERROR\n", yytext);
+}
 %%
 int main() {
 	yylex();
