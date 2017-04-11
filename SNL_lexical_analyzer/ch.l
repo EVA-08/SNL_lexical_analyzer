@@ -1,4 +1,7 @@
 %{
+	#include<map>
+	#include<string>
+	#include<utility>
 	enum type {
 		IDENTIFIER, 
 		RESERVED_WORDS,  
@@ -8,9 +11,10 @@
 		ANNOTATION_TERMINATOR, 
 		CHARACTER_IDENTIFIER,
 		ARRAY_INDEX,
-		UNSIGNED_INTEGER£¬
-		ERROR
+		UNSIGNED_INTEGER
 	};
+	std::map<std::string, int> identifiers;
+	std::map<int, int> unsignedIntegers;
 %}
 %%
 program|type|integer|char|array|of {
@@ -41,21 +45,32 @@ then|else|fi|while|do|read|write|return {
 	printf("'%s' ARRAY_INDEX\n", yytext);
 }
 
-[\+\*-/\(\)\[\];\.<=<<EOF>>]|" " {
+[ \"\+\*-/\(\)\[\];\.\n\t<=<<EOF>>] {
 	printf("'%s' SINGLE_CHARACTER_DELIMITER\n", yytext);
 }
 
+
 [1-9][0-9]* {
-	printf("'%s' UNSIGNED_INTEGER\n", yytext);
+	int num = atoi(yytext);
+	if (unsignedIntegers.count(num)) {
+		printf("'%s' UNSIGNED_INTEGER ID=%d\n", yytext, unsignedIntegers[num]);
+	} else {
+		printf("'%s' UNSIGNED_INTEGER ID=%d\n", yytext, unsignedIntegers.size());
+		unsignedIntegers.insert(std::pair<int, int>(num, unsignedIntegers.size()));
+	}
 }
 
-[a-zA-Z][a-zA-z0-9]* {
-	printf("'%s' IDENTIFIER\n", yytext);
+[a-zA-Z][a-zA-Z0-9]* {
+	std::string str(yytext);
+	if (identifiers.count(str)) {
+		printf("'%s' IDENTIFIER ID=%d\n", yytext, identifiers[str]);
+	} else {
+		printf("'%s' IDENTIFIER ID=%d\n", yytext, identifiers.size());
+		identifiers.insert(std::pair<std::string, int>(str, identifiers.size()));
+	}
+	
 }
 
-* {
-	printf("'%s' ERROR\n", yytext);
-}
 %%
 int main() {
 	yylex();
