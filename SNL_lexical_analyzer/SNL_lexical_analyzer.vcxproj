@@ -120,13 +120,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ch.l">
-      <FileType>Document</FileType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </Text>
+    <ClInclude Include="ast.hpp" />
+    <ClInclude Include="syntex.tab.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lex.yy.cpp" />
+    <ClCompile Include="syntex.tab.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ch.l" />
+    <None Include="syntex.y" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

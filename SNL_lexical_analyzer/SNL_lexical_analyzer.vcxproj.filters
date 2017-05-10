@@ -15,11 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ch.l" />
+    <ClInclude Include="ast.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="syntex.tab.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lex.yy.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="syntex.tab.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ch.l">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="syntex.y">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

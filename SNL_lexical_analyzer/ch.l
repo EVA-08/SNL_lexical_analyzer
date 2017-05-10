@@ -1,81 +1,162 @@
 %{
+	#define YYSTYPE Node*
 	#include<map>
 	#include<string>
 	#include<utility>
-	enum type {
-		IDENTIFIER, 
-		RESERVED_WORDS,  
-		SINGLE_CHARACTER_DELIMITER,
-		DOUBLE_CHARACTER_DELIMITER, 
-		ANNOTATION_HEADER,
-		ANNOTATION_TERMINATOR, 
-		CHARACTER_IDENTIFIER,
-		ARRAY_INDEX,
-		UNSIGNED_INTEGER
-	};
-	std::map<std::string, int> identifiers;
-	std::map<int, int> unsignedIntegers;
+	#include"ast.hpp"
+	#include"syntex.tab.h"
+	
+	
+	std::map<std::string, int> reservedWords;
+	bool in_comment = false;
 %}
 %%
-program|type|integer|char|array|of {
-	printf("'%s' RESERVED_WRODS\n", yytext);
+
+"+" {
+	if (!in_comment) {
+		yylval = new Leaf("PLUS");
+		return PLUS;
+	}
 }
 
-intc|record|end|var|procedure|begin|end|if {
-	printf("'%s' RESERVED_WRODS\n", yytext);
+"-" {
+	if (!in_comment) {
+		yylval = new Leaf("MINUS");
+		return MINUS;
+	}
 }
 
-then|else|fi|while|do|read|write|return {
-	printf("'%s' RESERVED_WRODS\n", yytext);
+"*" {
+	if (!in_comment) {
+		yylval = new Leaf("TIMES");
+		return TIMES;
+	}
 }
 
-\:= {
-	printf("'%s' DOUBLE_CHARACTER_DELIMITER\n", yytext);
+"/" {
+	if (!in_comment) {
+		yylval = new Leaf("OVER");
+		return OVER;
+	}
 }
 
-\{ {
-	printf("'%s' ANNOTATION_HEADER\n", yytext);
+"(" {
+	if (!in_comment) {
+		yylval = new Leaf("LPAREN");
+		return LPAREN;
+	}
 }
 
-\} {
-	printf("'%s' ANNOTATION_TERMINATOR\n", yytext);
+")" {
+	if (!in_comment) {
+		yylval = new Leaf("RPAREN");
+		return RPAREN;
+	}
 }
 
-\.\. {
-	printf("'%s' ARRAY_INDEX\n", yytext);
+"." {
+	if (!in_comment) {
+		yylval = new Leaf("DOT");
+		return DOT;
+	}
 }
 
-[ \"\+\*-/\(\)\[\];\.\n\t<=<<EOF>>] {
-	printf("'%s' SINGLE_CHARACTER_DELIMITER\n", yytext);
+"[" {
+	if (!in_comment) {
+		yylval = new Leaf("LMIDPAREN");
+		return LMIDPAREN;
+	}
 }
 
+"]" {
+	if (!in_comment) {
+		yylval = new Leaf("RMIDPAREN");
+		return RMIDPAREN;
+	}
+}
+
+";" {
+	if (!in_comment) {
+		yylval = new Leaf("SEMI");
+		return SEMI;
+	}
+}
+
+":" {
+	if (!in_comment) {
+		yylval = new Leaf("COLON");
+		return COLON;
+	}
+}
+
+"," {
+	if (!in_comment) {
+		yylval = new Leaf("COMMA");
+		return COMMA;
+	}
+}
+
+"<" {
+	if (!in_comment) {
+		yylval = new Leaf("LT");
+		return LT;
+	}
+}
+
+"=" {
+	if (!in_comment) {
+		yylval = new Leaf("EQ");
+		return EQ;
+	}
+}
+
+":=" {
+	if (!in_comment) {
+		yylval = new Leaf("ASSIGN");
+		return ASSIGN;
+	}
+}
+
+"{" {
+	in_comment = true;
+}
+
+"}" {
+	in_comment = false;
+}
+
+".." {
+	if (!in_comment) {
+		yylval = new Leaf("UNDERANGE");
+		return UNDERANGE;
+	}
+}
+
+[ \n\t] {}
 
 [1-9][0-9]* {
-	int num = atoi(yytext);
-	if (unsignedIntegers.count(num)) {
-		printf("'%s' UNSIGNED_INTEGER ID=%d\n", yytext, unsignedIntegers[num]);
-	} else {
-		printf("'%s' UNSIGNED_INTEGER ID=%d\n", yytext, unsignedIntegers.size());
-		unsignedIntegers.insert(std::pair<int, int>(num, unsignedIntegers.size()));
+	if (!in_comment) {
+		yylval = new Leaf("INTEGER");
+		return INTEGER;
 	}
 }
 
 [a-zA-Z][a-zA-Z0-9]* {
-	std::string str(yytext);
-	if (identifiers.count(str)) {
-		printf("'%s' IDENTIFIER ID=%d\n", yytext, identifiers[str]);
-	} else {
-		printf("'%s' IDENTIFIER ID=%d\n", yytext, identifiers.size());
-		identifiers.insert(std::pair<std::string, int>(str, identifiers.size()));
+	if (!in_comment) {
+		std::string str(yytext);
+		if (reservedWords.count(str)) {
+			yylval = new Leaf("str");
+			return reservedWords[str];
+		} else {
+			yylval = new Leaf("ID");
+			return ID;
+		}
 	}
+	
 	
 }
 
 %%
-int main() {
-	yylex();
-	system("pause");
-}
 
 int yywrap() {
 	return 1;
