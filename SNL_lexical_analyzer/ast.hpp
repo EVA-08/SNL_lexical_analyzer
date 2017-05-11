@@ -15,10 +15,12 @@ public:
 		Node::type = type;
 	}
 	virtual void traversal(int level) {
-		for (int i = 0; i < level; i++) {
-			std::cout << "    ";
+		if (type != "EMPTY") {
+			for (int i = 0; i < level; i++) {
+				std::cout << "  ";
+			}
+			std::cout << type << std::endl;
 		}
-		std::cout << type << std::endl;
 	}
 };
 
@@ -32,7 +34,7 @@ public:
 
 	virtual void traversal(int level) {
 		for (int i = 0; i < level; i++) {
-			std::cout << "    ";
+			std::cout << "  ";
 		}
 		std::cout << type << std::endl;
 		for (Node* node : nodes) {

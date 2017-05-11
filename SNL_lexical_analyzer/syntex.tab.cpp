@@ -66,7 +66,7 @@
 #line 1 "syntex.y"
 
  #define YYSTYPE Node*
- #include<stdio.h>
+ #include<iostream>
  #include"ast.hpp"
  #include"syntex.tab.h"
  
@@ -75,7 +75,7 @@
  void yyerror(char const*);
 
 /* Line 371 of yacc.c  */
-#line 79 "syntex.tab.c"
+#line 79 "syntex.tab.cpp"
 
 # ifndef YY_NULL
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -131,7 +131,7 @@ extern int yydebug;
      ARRAY = 275,
      OF = 276,
      RECORD = 277,
-     RETURN = 278,
+     RETURN1 = 278,
      INTEGER = 279,
      CHAR1 = 280,
      ID = 281,
@@ -185,7 +185,7 @@ int yyparse ();
 /* Copy the second part of user declarations.  */
 
 /* Line 390 of yacc.c  */
-#line 189 "syntex.tab.c"
+#line 189 "syntex.tab.cpp"
 
 #ifdef short
 # undef short
@@ -513,17 +513,17 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    57,    57,    59,    60,    62,    65,    66,    67,    68,
-      69,    70,    71,    74,    75,    76,    78,    79,    81,    82,
-      84,    85,    86,    88,    89,    90,    92,    93,    94,    95,
-      96,    99,   100,   101,   102,   104,   105,   106,   107,   108,
-     111,   112,   113,   119,   120,   121,   124,   125,   126,   128,
-     129,   130,   131,   132,   133,   134,   136,   138,   140,   142,
-     143,   144,   146,   147,   148,   149,   150,   151,   153,   154,
-     156,   158,   160,   162,   163,   165,   167,   169,   170,   171,
-     172,   173,   175,   176,   178,   179,   180,   183,   184,   185,
-     188,   189,   190,   191,   192,   193,   194,   195,   196,   197,
-     199,   200,   202,   203,   205,   206
+       0,    57,    57,    61,    62,    64,    67,    68,    69,    70,
+      71,    72,    73,    76,    77,    78,    80,    81,    83,    84,
+      86,    88,    89,    91,    92,    93,    95,    96,    97,    98,
+      99,   102,   103,   104,   105,   107,   108,   109,   110,   111,
+     114,   115,   116,   122,   123,   124,   127,   128,   129,   131,
+     132,   133,   134,   135,   136,   137,   139,   141,   143,   145,
+     146,   147,   149,   150,   151,   152,   153,   154,   156,   157,
+     159,   161,   164,   166,   167,   169,   171,   173,   174,   175,
+     176,   177,   179,   180,   182,   183,   184,   187,   188,   189,
+     192,   193,   194,   195,   196,   197,   198,   199,   200,   201,
+     203,   204,   206,   207,   209,   210
 };
 #endif
 
@@ -535,7 +535,7 @@ static const char *const yytname[] =
   "$end", "error", "$undefined", "ENDFILE", "ERROR1", "PROGRAM",
   "PROCEDURE", "TYPE", "VAR", "IF", "THEN", "ELSE", "FI", "WHILE", "DO",
   "ENDWH", "BEGIN1", "END1", "READ", "WRITE", "ARRAY", "OF", "RECORD",
-  "RETURN", "INTEGER", "CHAR1", "ID", "INTC", "CHARC", "ASSIGN", "EQ",
+  "RETURN1", "INTEGER", "CHAR1", "ID", "INTC", "CHARC", "ASSIGN", "EQ",
   "LT", "PLUS", "MINUS", "TIMES", "OVER", "LPAREN", "RPAREN", "DOT",
   "COLON", "SEMI", "COMMA", "LMIDPAREN", "RMIDPAREN", "UNDERANGE",
   "$accept", "Program", "ProgramHead", "ProgramName", "DeclarePart",
@@ -1544,151 +1544,633 @@ yyreduce:
     {
         case 2:
 /* Line 1792 of yacc.c  */
-#line 57 "syntex.y"
-    {(yyval) = new Parent("Program", (yyvsp[(1) - (4)]), (yyvsp[(2) - (4)]), (yyvsp[(3) - (4)]), (yyvsp[(4) - (4)]));}
+#line 58 "syntex.y"
+    {(yyval) = new Parent("Program", (yyvsp[(1) - (4)]), (yyvsp[(2) - (4)]), (yyvsp[(3) - (4)]), (yyvsp[(4) - (4)]));
+		 root = (yyval);											}
     break;
 
   case 3:
 /* Line 1792 of yacc.c  */
-#line 59 "syntex.y"
+#line 61 "syntex.y"
     {(yyval) = new Parent("ProgramHead", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
     break;
 
   case 4:
 /* Line 1792 of yacc.c  */
-#line 60 "syntex.y"
+#line 62 "syntex.y"
     {(yyval) = new Parent("ProgramName", (yyvsp[(1) - (1)]));}
     break;
 
   case 5:
 /* Line 1792 of yacc.c  */
-#line 62 "syntex.y"
+#line 64 "syntex.y"
     {(yyval) = new Parent("DeclarePart", (yyvsp[(1) - (3)]), (yyvsp[(2) - (3)]), (yyvsp[(3) - (3)]));}
+    break;
+
+  case 6:
+/* Line 1792 of yacc.c  */
+#line 67 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
     break;
 
   case 7:
 /* Line 1792 of yacc.c  */
-#line 66 "syntex.y"
+#line 68 "syntex.y"
     {(yyval) = new Parent("TypeDecpart", (yyvsp[(1) - (1)]));}
     break;
 
   case 8:
 /* Line 1792 of yacc.c  */
-#line 67 "syntex.y"
+#line 69 "syntex.y"
     {(yyval) = new Parent("TypeDec", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
     break;
 
   case 9:
 /* Line 1792 of yacc.c  */
-#line 68 "syntex.y"
+#line 70 "syntex.y"
     {(yyval) = new Parent("TypeDecList", (yyvsp[(1) - (5)]), (yyvsp[(2) - (5)]), (yyvsp[(3) - (5)]));}
+    break;
+
+  case 10:
+/* Line 1792 of yacc.c  */
+#line 71 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
     break;
 
   case 11:
 /* Line 1792 of yacc.c  */
-#line 70 "syntex.y"
+#line 72 "syntex.y"
     {(yyval) = new Parent("TypeDecMore", (yyvsp[(1) - (1)]));}
     break;
 
   case 12:
 /* Line 1792 of yacc.c  */
-#line 71 "syntex.y"
+#line 73 "syntex.y"
     {(yyval) = new Parent("TypeId", (yyvsp[(1) - (1)]));}
     break;
 
   case 13:
 /* Line 1792 of yacc.c  */
-#line 74 "syntex.y"
+#line 76 "syntex.y"
     {(yyval) = new Parent("TypeDef", (yyvsp[(1) - (1)]));}
     break;
 
   case 14:
 /* Line 1792 of yacc.c  */
-#line 75 "syntex.y"
+#line 77 "syntex.y"
     {(yyval) = new Parent("TypeDef", (yyvsp[(1) - (1)]));}
     break;
 
   case 15:
 /* Line 1792 of yacc.c  */
-#line 76 "syntex.y"
+#line 78 "syntex.y"
     {(yyval) = new Parent("TypeDef", (yyvsp[(1) - (1)]));}
     break;
 
   case 16:
 /* Line 1792 of yacc.c  */
-#line 78 "syntex.y"
+#line 80 "syntex.y"
     {(yyval) = new Parent("BaseType", (yyvsp[(1) - (1)]));}
     break;
 
   case 17:
 /* Line 1792 of yacc.c  */
-#line 79 "syntex.y"
+#line 81 "syntex.y"
     {(yyval) = new Parent("BaseType", (yyvsp[(1) - (1)]));}
     break;
 
   case 18:
 /* Line 1792 of yacc.c  */
-#line 81 "syntex.y"
+#line 83 "syntex.y"
     {(yyval) = new Parent("StructureType", (yyvsp[(1) - (1)]));}
     break;
 
   case 19:
 /* Line 1792 of yacc.c  */
-#line 82 "syntex.y"
+#line 84 "syntex.y"
     {(yyval) = new Parent("StructureType", (yyvsp[(1) - (1)]));}
     break;
 
   case 20:
 /* Line 1792 of yacc.c  */
-#line 84 "syntex.y"
-    {(yyval) = new Parent("ArrayType", (yyvsp[(1) - (8)]), (yyvsp[(2) - (8)]), (yyvsp[(3) - (8)]), (yyvsp[(4) - (8)]), (yyvsp[(5) - (8)]), (yyvsp[(6) - (8)]), (yyvsp[(7) - (8)]));}
+#line 87 "syntex.y"
+    {(yyval) = new Parent("ArrayType", (yyvsp[(1) - (8)]), (yyvsp[(2) - (8)]), (yyvsp[(3) - (8)]), (yyvsp[(4) - (8)]), (yyvsp[(5) - (8)]), (yyvsp[(6) - (8)]), (yyvsp[(7) - (8)]), (yyvsp[(8) - (8)]));}
     break;
 
   case 21:
 /* Line 1792 of yacc.c  */
-#line 85 "syntex.y"
+#line 88 "syntex.y"
     {(yyval) = new Parent("Low", (yyvsp[(1) - (1)]));}
     break;
 
   case 22:
 /* Line 1792 of yacc.c  */
-#line 86 "syntex.y"
+#line 89 "syntex.y"
     {(yyval) = new Parent("Top", (yyvsp[(1) - (1)]));}
     break;
 
   case 23:
 /* Line 1792 of yacc.c  */
-#line 88 "syntex.y"
+#line 91 "syntex.y"
     {(yyval) = new Parent("RecType", (yyvsp[(1) - (3)]), (yyvsp[(2) - (3)]), (yyvsp[(3) - (3)]));}
     break;
 
   case 24:
 /* Line 1792 of yacc.c  */
-#line 89 "syntex.y"
+#line 92 "syntex.y"
     {(yyval) = new Parent("FieldDecList", (yyvsp[(1) - (4)]), (yyvsp[(2) - (4)]), (yyvsp[(3) - (4)]));}
     break;
 
   case 25:
 /* Line 1792 of yacc.c  */
-#line 90 "syntex.y"
+#line 93 "syntex.y"
     {(yyval) = new Parent("FieldDecList", (yyvsp[(1) - (4)]), (yyvsp[(2) - (4)]), (yyvsp[(3) - (4)]));}
+    break;
+
+  case 26:
+/* Line 1792 of yacc.c  */
+#line 95 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
     break;
 
   case 27:
 /* Line 1792 of yacc.c  */
-#line 93 "syntex.y"
+#line 96 "syntex.y"
     {(yyval) = new Parent("FieldDecMore", (yyvsp[(1) - (1)]));}
     break;
 
   case 28:
 /* Line 1792 of yacc.c  */
-#line 94 "syntex.y"
+#line 97 "syntex.y"
     {(yyval) = new Parent("IdList", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 29:
+/* Line 1792 of yacc.c  */
+#line 98 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 30:
+/* Line 1792 of yacc.c  */
+#line 99 "syntex.y"
+    {(yyval) = new Parent("IdMore", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 31:
+/* Line 1792 of yacc.c  */
+#line 102 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 32:
+/* Line 1792 of yacc.c  */
+#line 103 "syntex.y"
+    {(yyval) = new Parent("VarDecpart", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 33:
+/* Line 1792 of yacc.c  */
+#line 104 "syntex.y"
+    {(yyval) = new Parent("VarDec", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 34:
+/* Line 1792 of yacc.c  */
+#line 105 "syntex.y"
+    {(yyval) = new Parent("VarDecList", (yyvsp[(1) - (4)]), (yyvsp[(2) - (4)]), (yyvsp[(3) - (4)]), (yyvsp[(4) - (4)]));}
+    break;
+
+  case 35:
+/* Line 1792 of yacc.c  */
+#line 107 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 36:
+/* Line 1792 of yacc.c  */
+#line 108 "syntex.y"
+    {(yyval) = new Parent("VarDecMore", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 37:
+/* Line 1792 of yacc.c  */
+#line 109 "syntex.y"
+    {(yyval) = new Parent("VarIdeList", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 38:
+/* Line 1792 of yacc.c  */
+#line 110 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 39:
+/* Line 1792 of yacc.c  */
+#line 111 "syntex.y"
+    {(yyval) = new Parent("VarIdMore", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 40:
+/* Line 1792 of yacc.c  */
+#line 114 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 41:
+/* Line 1792 of yacc.c  */
+#line 115 "syntex.y"
+    {(yyval) = new Parent("ProcDecpart", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 42:
+/* Line 1792 of yacc.c  */
+#line 120 "syntex.y"
+    {(yyval) = new Parent("ProcDec", (yyvsp[(1) - (9)]), (yyvsp[(2) - (9)]), (yyvsp[(3) - (9)]), (yyvsp[(4) - (9)]), (yyvsp[(5) - (9)]), (yyvsp[(6) - (9)]), (yyvsp[(7) - (9)]), (yyvsp[(8) - (9)]), (yyvsp[(9) - (9)]));}
+    break;
+
+  case 43:
+/* Line 1792 of yacc.c  */
+#line 122 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 44:
+/* Line 1792 of yacc.c  */
+#line 123 "syntex.y"
+    {(yyval) = new Parent("ProcDecMore", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 45:
+/* Line 1792 of yacc.c  */
+#line 124 "syntex.y"
+    {(yyval) = new Parent("ProcName", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 46:
+/* Line 1792 of yacc.c  */
+#line 127 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 47:
+/* Line 1792 of yacc.c  */
+#line 128 "syntex.y"
+    {(yyval) = new Parent("ParamList", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 48:
+/* Line 1792 of yacc.c  */
+#line 129 "syntex.y"
+    {(yyval) = new Parent("ParamDecList", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 49:
+/* Line 1792 of yacc.c  */
+#line 131 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 50:
+/* Line 1792 of yacc.c  */
+#line 132 "syntex.y"
+    {(yyval) = new Parent("ParamMore", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 51:
+/* Line 1792 of yacc.c  */
+#line 133 "syntex.y"
+    {(yyval) = new Parent("Param", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 52:
+/* Line 1792 of yacc.c  */
+#line 134 "syntex.y"
+    {(yyval) = new Parent("Param", (yyvsp[(1) - (3)]), (yyvsp[(2) - (3)]));}
+    break;
+
+  case 53:
+/* Line 1792 of yacc.c  */
+#line 135 "syntex.y"
+    {(yyval) = new Parent("FormList", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 54:
+/* Line 1792 of yacc.c  */
+#line 136 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 55:
+/* Line 1792 of yacc.c  */
+#line 137 "syntex.y"
+    {(yyval) = new Parent("FidMore", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 56:
+/* Line 1792 of yacc.c  */
+#line 139 "syntex.y"
+    {(yyval) = new Parent("ProcDecPart", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 57:
+/* Line 1792 of yacc.c  */
+#line 141 "syntex.y"
+    {(yyval) = new Parent("ProgramBode", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 58:
+/* Line 1792 of yacc.c  */
+#line 143 "syntex.y"
+    {(yyval) = new Parent("ProgramBody", (yyvsp[(1) - (3)]), (yyvsp[(2) - (3)]), (yyvsp[(3) - (3)]));}
+    break;
+
+  case 59:
+/* Line 1792 of yacc.c  */
+#line 145 "syntex.y"
+    {(yyval) = new Parent("StmList", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 60:
+/* Line 1792 of yacc.c  */
+#line 146 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 61:
+/* Line 1792 of yacc.c  */
+#line 147 "syntex.y"
+    {(yyval) = new Parent("StmMore", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 62:
+/* Line 1792 of yacc.c  */
+#line 149 "syntex.y"
+    {(yyval) = new Parent("Stm", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 63:
+/* Line 1792 of yacc.c  */
+#line 150 "syntex.y"
+    {(yyval) = new Parent("Stm", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 64:
+/* Line 1792 of yacc.c  */
+#line 151 "syntex.y"
+    {(yyval) = new Parent("Stm", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 65:
+/* Line 1792 of yacc.c  */
+#line 152 "syntex.y"
+    {(yyval) = new Parent("Stm", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 66:
+/* Line 1792 of yacc.c  */
+#line 153 "syntex.y"
+    {(yyval) = new Parent("Stm", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 67:
+/* Line 1792 of yacc.c  */
+#line 154 "syntex.y"
+    {(yyval) = new Parent("Stm", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 68:
+/* Line 1792 of yacc.c  */
+#line 156 "syntex.y"
+    {(yyval) = new Parent("AssCall", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 69:
+/* Line 1792 of yacc.c  */
+#line 157 "syntex.y"
+    {(yyval) = new Parent("Asscall", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 70:
+/* Line 1792 of yacc.c  */
+#line 159 "syntex.y"
+    {(yyval) = new Parent("AssignmentRest", (yyvsp[(1) - (3)]), (yyvsp[(2) - (3)]), (yyvsp[(3) - (3)]));}
+    break;
+
+  case 71:
+/* Line 1792 of yacc.c  */
+#line 161 "syntex.y"
+    {
+				(yyval) = new Parent("ConditionalStm", (yyvsp[(1) - (7)]), (yyvsp[(2) - (7)]), (yyvsp[(3) - (7)]), (yyvsp[(4) - (7)]), (yyvsp[(5) - (7)]), (yyvsp[(6) - (7)]), (yyvsp[(7) - (7)]));}
+    break;
+
+  case 72:
+/* Line 1792 of yacc.c  */
+#line 164 "syntex.y"
+    {(yyval) = new Parent("LoopStm", (yyvsp[(1) - (5)]), (yyvsp[(2) - (5)]), (yyvsp[(3) - (5)]), (yyvsp[(4) - (5)]), (yyvsp[(5) - (5)]));}
+    break;
+
+  case 73:
+/* Line 1792 of yacc.c  */
+#line 166 "syntex.y"
+    {(yyval) = new Parent("InputStm", (yyvsp[(1) - (4)]), (yyvsp[(2) - (4)]), (yyvsp[(3) - (4)]), (yyvsp[(4) - (4)]));}
+    break;
+
+  case 74:
+/* Line 1792 of yacc.c  */
+#line 167 "syntex.y"
+    {(yyval) = new Parent("Invar", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 75:
+/* Line 1792 of yacc.c  */
+#line 169 "syntex.y"
+    {(yyval) = new Parent("OutputStm", (yyvsp[(1) - (4)]), (yyvsp[(2) - (4)]), (yyvsp[(3) - (4)]), (yyvsp[(4) - (4)]));}
+    break;
+
+  case 76:
+/* Line 1792 of yacc.c  */
+#line 171 "syntex.y"
+    {(yyval) = new Parent("ReturnStm", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 77:
+/* Line 1792 of yacc.c  */
+#line 173 "syntex.y"
+    {(yyval) = new Parent("CallStmRest", (yyvsp[(1) - (3)]), (yyvsp[(2) - (3)]), (yyvsp[(3) - (3)]));}
+    break;
+
+  case 78:
+/* Line 1792 of yacc.c  */
+#line 174 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 79:
+/* Line 1792 of yacc.c  */
+#line 175 "syntex.y"
+    {(yyval) = new Parent("ActParamList", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 80:
+/* Line 1792 of yacc.c  */
+#line 176 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 81:
+/* Line 1792 of yacc.c  */
+#line 177 "syntex.y"
+    {(yyval) = new Parent("ActParamMore", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 82:
+/* Line 1792 of yacc.c  */
+#line 179 "syntex.y"
+    {(yyval) = new Parent("RelExp", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 83:
+/* Line 1792 of yacc.c  */
+#line 180 "syntex.y"
+    {(yyval) = new Parent("OtherRelE", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 84:
+/* Line 1792 of yacc.c  */
+#line 182 "syntex.y"
+    {(yyval) = new Parent("Exp", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 85:
+/* Line 1792 of yacc.c  */
+#line 183 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 86:
+/* Line 1792 of yacc.c  */
+#line 184 "syntex.y"
+    {(yyval) = new Parent("OtherTerm", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 87:
+/* Line 1792 of yacc.c  */
+#line 187 "syntex.y"
+    {(yyval) = new Parent("Term", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 88:
+/* Line 1792 of yacc.c  */
+#line 188 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 89:
+/* Line 1792 of yacc.c  */
+#line 189 "syntex.y"
+    {(yyval) = new Parent("OtherFactor", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 90:
+/* Line 1792 of yacc.c  */
+#line 192 "syntex.y"
+    {(yyval) = new Parent("Factor", (yyvsp[(1) - (3)]), (yyvsp[(2) - (3)]), (yyvsp[(3) - (3)]));}
+    break;
+
+  case 91:
+/* Line 1792 of yacc.c  */
+#line 193 "syntex.y"
+    {(yyval) = new Parent("Factor", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 92:
+/* Line 1792 of yacc.c  */
+#line 194 "syntex.y"
+    {(yyval) = new Parent("Factor", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 93:
+/* Line 1792 of yacc.c  */
+#line 195 "syntex.y"
+    {(yyval) = new Parent("Variable", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 94:
+/* Line 1792 of yacc.c  */
+#line 196 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 95:
+/* Line 1792 of yacc.c  */
+#line 197 "syntex.y"
+    {(yyval) = new Parent("VariMore", (yyvsp[(1) - (3)]), (yyvsp[(2) - (3)]), (yyvsp[(3) - (3)]));}
+    break;
+
+  case 96:
+/* Line 1792 of yacc.c  */
+#line 198 "syntex.y"
+    {(yyval) = new Parent("VariMore", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 97:
+/* Line 1792 of yacc.c  */
+#line 199 "syntex.y"
+    {(yyval) = new Parent("FieldVar", (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]));}
+    break;
+
+  case 98:
+/* Line 1792 of yacc.c  */
+#line 200 "syntex.y"
+    {(yyval) = new Leaf("Empty");}
+    break;
+
+  case 99:
+/* Line 1792 of yacc.c  */
+#line 201 "syntex.y"
+    {(yyval) = new Parent("FieldVarMore", (yyvsp[(1) - (3)]), (yyvsp[(2) - (3)]), (yyvsp[(3) - (3)]));}
+    break;
+
+  case 100:
+/* Line 1792 of yacc.c  */
+#line 203 "syntex.y"
+    {(yyval) = new Parent("CmpOp", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 101:
+/* Line 1792 of yacc.c  */
+#line 204 "syntex.y"
+    {(yyval) = new Parent("CmpOp", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 102:
+/* Line 1792 of yacc.c  */
+#line 206 "syntex.y"
+    {(yyval) = new Parent("AddOp", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 103:
+/* Line 1792 of yacc.c  */
+#line 207 "syntex.y"
+    {(yyval) = new Parent("AddOp", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 104:
+/* Line 1792 of yacc.c  */
+#line 209 "syntex.y"
+    {(yyval) = new Parent("MultOp", (yyvsp[(1) - (1)]));}
+    break;
+
+  case 105:
+/* Line 1792 of yacc.c  */
+#line 210 "syntex.y"
+    {(yyval) = new Parent("OVER", (yyvsp[(1) - (1)]));}
     break;
 
 
 /* Line 1792 of yacc.c  */
-#line 1692 "syntex.tab.c"
+#line 2174 "syntex.tab.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1920,14 +2402,15 @@ yyreturn:
 
 
 /* Line 2055 of yacc.c  */
-#line 208 "syntex.y"
+#line 212 "syntex.y"
 
 
 void yyerror (char const *s) {
-  fprintf (stderr, "%s/n", s);
+   std::cout << "ERROR: " << s;
 }
 
 int main () {
 	yyparse ();
+	root->traversal(0);
 	system("pause");  
 }

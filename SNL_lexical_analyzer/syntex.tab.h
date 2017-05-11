@@ -66,7 +66,7 @@ extern int yydebug;
      ARRAY = 275,
      OF = 276,
      RECORD = 277,
-     RETURN = 278,
+     RETURN1 = 278,
      INTEGER = 279,
      CHAR1 = 280,
      ID = 281,

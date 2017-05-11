@@ -124,12 +124,12 @@
     <ClInclude Include="syntex.tab.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="lex.yy.cpp" />
-    <ClCompile Include="syntex.tab.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ch.l" />
     <None Include="syntex.y" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="lex.yy.cpp" />
+    <ClCompile Include="syntex.tab.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

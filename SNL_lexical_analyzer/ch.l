@@ -6,9 +6,19 @@
 	#include"ast.hpp"
 	#include"syntex.tab.h"
 	
-	
-	std::map<std::string, int> reservedWords;
+	std::map<std::string, int> reservedWords{{"program", PROGRAM}, {"type", TYPE}, {"var", VAR},
+	{"procedure", PROCEDURE}, {"begin", BEGIN1}, {"end", END1}, {"array", ARRAY}, {"of", OF},
+	{"record", RECORD}, {"if", IF}, {"then", THEN}, {"else", ELSE}, {"fi", FI}, {"while", WHILE},
+	{"do", DO}, {"endwh", ENDWH}, {"read", READ}, {"write", WRITE}, {"return", RETURN1}, 
+	{"integer", INTEGER}, {"char", CHAR1}};
 	bool in_comment = false;
+
+	std::map<std::string, std::string> reservedWordsMap{{"program", "PROGRAM"}, {"type", "TYPE"}, {"var", "VAR"},
+	{"procedure", "PROCEDURE"}, {"begin", "BEGIN1"}, {"end", "END1"}, {"array", "ARRAY"}, {"of", "OF"},
+	{"record", "RECORD"}, {"if", "IF"}, {"then", "THEN"}, {"else", "ELSE"}, {"fi", "FI"}, {"while", "WHILE"},
+	{"do", "DO"}, {"endwh", "ENDWH"}, {"read", "READ"}, {"write", "WRITE"}, {"return", "RETURN1"}, 
+	{"integer", "INTEGER"}, {"char", "CHAR1"}};
+
 %}
 %%
 
@@ -134,10 +144,10 @@
 
 [ \n\t] {}
 
-[1-9][0-9]* {
+0|[1-9][0-9]* {
 	if (!in_comment) {
-		yylval = new Leaf("INTEGER");
-		return INTEGER;
+		yylval = new Leaf("INTC");
+		return INTC;
 	}
 }
 
@@ -145,7 +155,7 @@
 	if (!in_comment) {
 		std::string str(yytext);
 		if (reservedWords.count(str)) {
-			yylval = new Leaf("str");
+			yylval = new Leaf(reservedWordsMap[str]);
 			return reservedWords[str];
 		} else {
 			yylval = new Leaf("ID");

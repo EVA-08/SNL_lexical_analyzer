@@ -1,5 +1,5 @@
 
-#line 2 "lex.yy.c"
+#line 2 "lex.yy.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -432,11 +432,11 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[29] =
+static const flex_int16_t yy_accept[30] =
     {   0,
         0,    0,   23,   22,   19,    5,    6,    3,    1,   12,
-        2,    7,    4,   20,   11,   10,   13,   14,   21,    8,
-        9,   16,   17,   18,   20,   15,   21,    0
+        2,    7,    4,   20,   20,   11,   10,   13,   14,   21,
+        8,    9,   16,   17,   18,   20,   15,   21,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -478,38 +478,38 @@ static const YY_CHAR yy_meta[22] =
         1
     } ;
 
-static const flex_int16_t yy_base[29] =
+static const flex_int16_t yy_base[30] =
     {   0,
         0,    0,   33,   35,   35,   35,   35,   35,   35,   35,
-       35,   23,   35,   11,   15,   35,   35,   35,   13,   35,
-       35,   35,   35,   35,   15,   35,   17,   35
+       35,   23,   35,   35,   11,   15,   35,   35,   35,   13,
+       35,   35,   35,   35,   35,   15,   35,   17,   35
     } ;
 
-static const flex_int16_t yy_def[29] =
+static const flex_int16_t yy_def[30] =
     {   0,
-       28,    1,   28,   28,   28,   28,   28,   28,   28,   28,
-       28,   28,   28,   28,   28,   28,   28,   28,   28,   28,
-       28,   28,   28,   28,   28,   28,   28,    0
+       29,    1,   29,   29,   29,   29,   29,   29,   29,   29,
+       29,   29,   29,   29,   29,   29,   29,   29,   29,   29,
+       29,   29,   29,   29,   29,   29,   29,   29,    0
     } ;
 
 static const flex_int16_t yy_nxt[57] =
     {   0,
         4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
-        4,   14,   15,   16,   17,   18,   19,   20,   21,   22,
-       23,   25,   25,   27,   27,   25,   25,   27,   27,   27,
-       26,   24,   28,   27,    3,   28,   28,   28,   28,   28,
-       28,   28,   28,   28,   28,   28,   28,   28,   28,   28,
-       28,   28,   28,   28,   28,   28
+       14,   15,   16,   17,   18,   19,   20,   21,   22,   23,
+       24,   26,   26,   28,   28,   26,   26,   28,   28,   28,
+       27,   25,   29,   28,    3,   29,   29,   29,   29,   29,
+       29,   29,   29,   29,   29,   29,   29,   29,   29,   29,
+       29,   29,   29,   29,   29,   29
     } ;
 
 static const flex_int16_t yy_chk[57] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,   14,   14,   19,   19,   25,   25,   27,   27,   19,
-       15,   12,    3,   27,   28,   28,   28,   28,   28,   28,
-       28,   28,   28,   28,   28,   28,   28,   28,   28,   28,
-       28,   28,   28,   28,   28,   28
+        1,   15,   15,   20,   20,   26,   26,   28,   28,   20,
+       16,   12,    3,   28,   29,   29,   29,   29,   29,   29,
+       29,   29,   29,   29,   29,   29,   29,   29,   29,   29,
+       29,   29,   29,   29,   29,   29
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -535,11 +535,21 @@ char *yytext;
 	#include"ast.hpp"
 	#include"syntex.tab.h"
 	
-	
-	std::map<std::string, int> reservedWords;
+	std::map<std::string, int> reservedWords{{"program", PROGRAM}, {"type", TYPE}, {"var", VAR},
+	{"procedure", PROCEDURE}, {"begin", BEGIN1}, {"end", END1}, {"array", ARRAY}, {"of", OF},
+	{"record", RECORD}, {"if", IF}, {"then", THEN}, {"else", ELSE}, {"fi", FI}, {"while", WHILE},
+	{"do", DO}, {"endwh", ENDWH}, {"read", READ}, {"write", WRITE}, {"return", RETURN1}, 
+	{"integer", INTEGER}, {"char", CHAR1}};
 	bool in_comment = false;
-#line 541 "lex.yy.c"
-#line 542 "lex.yy.c"
+
+	std::map<std::string, std::string> reservedWordsMap{{"program", "PROGRAM"}, {"type", "TYPE"}, {"var", "VAR"},
+	{"procedure", "PROCEDURE"}, {"begin", "BEGIN1"}, {"end", "END1"}, {"array", "ARRAY"}, {"of", "OF"},
+	{"record", "RECORD"}, {"if", "IF"}, {"then", "THEN"}, {"else", "ELSE"}, {"fi", "FI"}, {"while", "WHILE"},
+	{"do", "DO"}, {"endwh", "ENDWH"}, {"read", "READ"}, {"write", "WRITE"}, {"return", "RETURN1"}, 
+	{"integer", "INTEGER"}, {"char", "CHAR1"}};
+
+#line 551 "lex.yy.cpp"
+#line 552 "lex.yy.cpp"
 
 #define INITIAL 0
 
@@ -753,10 +763,10 @@ YY_DECL
 		}
 
 	{
-#line 13 "ch.l"
+#line 23 "ch.l"
 
 
-#line 759 "lex.yy.c"
+#line 769 "lex.yy.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -783,7 +793,7 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 29 )
+				if ( yy_current_state >= 30 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -815,7 +825,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 15 "ch.l"
+#line 25 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("PLUS");
@@ -825,7 +835,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 22 "ch.l"
+#line 32 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("MINUS");
@@ -835,7 +845,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 29 "ch.l"
+#line 39 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("TIMES");
@@ -845,7 +855,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 36 "ch.l"
+#line 46 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("OVER");
@@ -855,7 +865,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 43 "ch.l"
+#line 53 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("LPAREN");
@@ -865,7 +875,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 50 "ch.l"
+#line 60 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("RPAREN");
@@ -875,7 +885,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 57 "ch.l"
+#line 67 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("DOT");
@@ -885,7 +895,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 64 "ch.l"
+#line 74 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("LMIDPAREN");
@@ -895,7 +905,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 71 "ch.l"
+#line 81 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("RMIDPAREN");
@@ -905,7 +915,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 78 "ch.l"
+#line 88 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("SEMI");
@@ -915,7 +925,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 85 "ch.l"
+#line 95 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("COLON");
@@ -925,7 +935,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 92 "ch.l"
+#line 102 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("COMMA");
@@ -935,7 +945,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 99 "ch.l"
+#line 109 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("LT");
@@ -945,7 +955,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 106 "ch.l"
+#line 116 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("EQ");
@@ -955,7 +965,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 113 "ch.l"
+#line 123 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("ASSIGN");
@@ -965,21 +975,21 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 120 "ch.l"
+#line 130 "ch.l"
 {
 	in_comment = true;
 }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 124 "ch.l"
+#line 134 "ch.l"
 {
 	in_comment = false;
 }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 128 "ch.l"
+#line 138 "ch.l"
 {
 	if (!in_comment) {
 		yylval = new Leaf("UNDERANGE");
@@ -990,27 +1000,27 @@ YY_RULE_SETUP
 case 19:
 /* rule 19 can match eol */
 YY_RULE_SETUP
-#line 135 "ch.l"
+#line 145 "ch.l"
 {}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 137 "ch.l"
+#line 147 "ch.l"
 {
 	if (!in_comment) {
-		yylval = new Leaf("INTEGER");
-		return INTEGER;
+		yylval = new Leaf("INTC");
+		return INTC;
 	}
 }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 144 "ch.l"
+#line 154 "ch.l"
 {
 	if (!in_comment) {
 		std::string str(yytext);
 		if (reservedWords.count(str)) {
-			yylval = new Leaf("str");
+			yylval = new Leaf(reservedWordsMap[str]);
 			return reservedWords[str];
 		} else {
 			yylval = new Leaf("ID");
@@ -1023,10 +1033,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 159 "ch.l"
+#line 169 "ch.l"
 ECHO;
 	YY_BREAK
-#line 1029 "lex.yy.c"
+#line 1039 "lex.yy.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1319,7 +1329,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 29 )
+			if ( yy_current_state >= 30 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1347,11 +1357,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 29 )
+		if ( yy_current_state >= 30 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 28);
+	yy_is_jam = (yy_current_state == 29);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2027,7 +2037,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 159 "ch.l"
+#line 169 "ch.l"
 
 
 int yywrap() {
